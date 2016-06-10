@@ -1,6 +1,5 @@
 <!------------------------
   Author: Pei-Hua Lin
-  http://pepellin.github.io
   lin.2049@osu.edu
  ------------------------>
 <!DOCTYPE html>
@@ -17,14 +16,15 @@
     <div class="bottom">
         <div class="left">
             <h3>Create a Task</h3>
-                <form>
+                <p id="errorMessage">Please fill all the fields in the form.</p>
+                <form id="taskForm">
                     <label>Task Name</label>
                     <input type="text" id="tname" name="tname">
                     <label>Date</label>
                     <input type="date" id="date" name="date">
                     <label>Assigned To</label>
                     <input type="text" id="assigned" name="assigned">
-                    <button name="data" type="button" onclick="submitForm(tname.value, date.value, assigned.value)">Submit</button>
+                    <input type="button" onclick="submitForm(tname.value, date.value, assigned.value)" value="Submit">
                 </form>
                 
         </div>
@@ -32,7 +32,6 @@
             <h3>Existing Tasks</h3>
             <div class="table">
                 <table id="data">
-
                 </table>
             </div>
     </div>

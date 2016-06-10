@@ -1,66 +1,47 @@
-//   Author: Pei-Hua Lin
-//   http://pepellin.github.io
-//   lin.2049@osu.edu
+////////////////////////////
+//   Author: Pei-Hua Lin  //
+//   lin.2049@osu.edu     //
+////////////////////////////
 
+const jsonfile = '[\
+	{"name": "Test Task #1", "date": "12/01/2012", "assigned": "John Doe" },\
+	{"name": "Test Task #2", "date": "12/02/2012", "assigned": "John Doe" },\
+	{"name": "Test Task #3", "date": "12/03/2012", "assigned": "John Doe" },\
+	{"name": "Test Task #4", "date": "12/04/2012", "assigned": "John Doe" },\
+	{"name": "Test Task #5", "date": "12/05/2012", "assigned": "John Doe" },\
+	{"name": "Test Task #6", "date": "12/06/2012", "assigned": "John Doe" },\
+	{"name": "Test Task #7", "date": "12/07/2012", "assigned": "John Doe" }\
+]';
 var tasksArr;
 
-// var tasksArr = [
-// 	{"name": "Test Task #1", "date": "12/01/2012", "assigned": "John Doe" },
-// 	{"name": "Test Task #2", "date": "12/02/2012", "assigned": "John Doe" },
-// 	{"name": "Test Task #3", "date": "12/03/2012", "assigned": "John Doe" },
-// 	{"name": "Test Task #4", "date": "12/04/2012", "assigned": "John Doe" },
-// 	{"name": "Test Task #5", "date": "12/05/2012", "assigned": "John Doe" },
-// 	{"name": "Test Task #6", "date": "12/06/2012", "assigned": "John Doe" },
-// 	{"name": "Test Task #7", "date": "12/07/2012", "assigned": "John Doe" }
-// ];
-
-function initTasks(arr) {
+function showTask() {
     var out = "";
     var i;
-    for(i = 0; i < arr.length; i++) {
-        out += '<tr><td class="col-one">' + arr[i].name + '<span class="col-two">' + 
-        arr[i].date + '</span></td><td class="col-three">' + arr[i].assigned + '</td></tr>';
+    for(i = 0; i < tasksArr.length; i++) {
+        out += '<tr><td class="col-one">' + tasksArr[i].name + '<span class="col-two">' + 
+        tasksArr[i].date + '</span></td><td class="col-three">' + tasksArr[i].assigned + '</td></tr>';
     }
     document.getElementById("data").innerHTML = out;
 }
 
+function initTasks(str) {
+    tasksArr = JSON.parse(str);
+    showTask();
+}
+
 function submitForm(tname, date, assigned) {
+    if (tname == null || tname == "" || date == null || date == "" || assigned == null || assigned == "") {
+        alert("Please fill all the fields in the form.");
+        document.getElementById("errorMessage").style.display = "block";
+        return ;
+    }
+
     var newTask = {"name": tname, "date": date, "assigned": assigned };
     tasksArr.push(newTask);
-    initTasks(tasksArr);
+    showTask();
+    document.forms['taskForm'].reset()
 }
 
 $(document).ready(function() {
-    $.getJSON("assets/json/tasks.json", function(json) {
-        initTasks(json);
-        tasksArr = json;
-    });
+    initTasks(jsonfile);
 });
-
-
-// function submitForm(tname, date, assigned) {
-//     var $tname = $("#tname");
-//     var $date = $("#date");
-//     var $assigned = $("#assigned");
-//     var params = {
-//     name: $tname.val(),
-//     date: $date.val(),
-//     assigned: $assigned.val(),
-//     }
-
-//     $.ajax({
-//           type: 'POST',
-//           data: params,
-//           url: 'save_json.php',
-
-//           success: function(data) {
-//               console.log('success');
-//             },
-//             error: function(data) {
-//               console.log('error');
-//             },
-//             complete: function() {
-//               console.log('complete');
-//             }
-//         });
-//     }
