@@ -21,7 +21,10 @@ function initTasks(str) {
     showTask();
 }
 
-function submitForm(tname, date, assigned) {
+function submitForm () {
+    var tname = document.getElementById("tname").value;
+    var date = document.getElementById("date").value;
+    var assigned = document.getElementById("assigned").value;
     if (tname == null || tname == "" || date == null || date == "" || assigned == null || assigned == "") {
         alert("Please fill all the fields in the form.");
         document.getElementById("errorMessage").style.display = "block";
@@ -31,9 +34,12 @@ function submitForm(tname, date, assigned) {
     var newTask = {"name": tname, "date": date, "assigned": assigned };
     tasksArr.push(newTask);
     showTask();
-    document.forms['taskForm'].reset()
+    document.forms['taskForm'].reset();
+    document.getElementById("errorMessage").style.display = "none";
 }
 
 $(document).ready(function() {
     initTasks(jsonfile);
 });
+
+document.getElementById("submitBtn").onclick = submitForm;
