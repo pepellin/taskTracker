@@ -8,10 +8,9 @@ var tasksArr;
 
 function showTask() {
     var out = "";
-    var i;
-    for(i = 0; i < tasksArr.length; i++) {
-        out += '<tr><td class="col-one">' + tasksArr[i].name + '<span class="col-two">' + 
-        tasksArr[i].date + '</span></td><td class="col-three">' + tasksArr[i].assigned + '</td></tr>';
+    for(var i = tasksArr.length-1; i >= 0; i--) {
+        out += '<tr><td class="col-one">' + tasksArr[i].name + '</td><td class="col-two">' + 
+        tasksArr[i].date + '</td><td class="col-three">' + tasksArr[i].assigned + '</td></tr>';
     }
     document.getElementById("data").innerHTML = out;
 }
@@ -21,9 +20,72 @@ function initTasks(str) {
     showTask();
 }
 
+function checkDate(field)
+  {
+    var allowBlank = false;
+    var minYear = (new Date()).getFullYear();
+
+    var errorMsg = "";
+
+    re = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+
+    if(field != '') {
+        if(regs = field.match(re)) {
+            if(regs[3] < minYear) {
+                errorMsg = "Invalid value for year: " + regs[3] + " - must be in or after " + minYear;
+            } else {
+                switch (regs[1]) {
+                    case '01':
+                    case '03':
+                    case '05':
+                    case '07':
+                    case '08':
+                    case '10':
+                    case '12':
+                        if (regs[2] < 1 || regs[2] > 31) {
+                            errorMsg = "Invalid value for day: " + regs[2];
+                        }
+                        break;
+                    case '04':
+                    case '06':
+                    case '09':
+                    case '11':
+                        if (regs[2] < 1 || regs[2] > 30) {
+                            errorMsg = "Invalid value for day: " + regs[2];
+                        }
+                        break;
+                    case '02':
+                    console.log(regs[3] % 4);
+                        var lastDate = (regs[3] % 400 == 0 || (regs[3] % 100 != 0 && regs[3] % 4 == 0)) ? '29' : '28';
+                        if (regs[2] < 1 || regs[2] > lastDate) {
+                            errorMsg = "Invalid value for day: " + regs[2];
+                        }
+                        break;
+                    default:
+                        errorMsg = "Invalid value for month: " + regs[1];                                     
+                }
+            }
+      } else {
+        errorMsg = "Invalid date format: " + field;
+      }
+    } else if(!allowBlank) {
+        errorMsg = "Empty date not allowed!";
+    }
+
+    if(errorMsg != "") {
+        alert(errorMsg);
+        document.getElementById("errorMessage").style.display = "block";      
+        return false;
+    }
+    return true;
+  }
+
 function submitForm () {
     var tname = document.getElementById("tname").value;
     var date = document.getElementById("date").value;
+    if (!checkDate(date)) {
+        return;
+    }
     var assigned = document.getElementById("assigned").value;
     if (tname == null || tname == "" || date == null || date == "" || assigned == null || assigned == "") {
         alert("Please fill all the fields in the form.");

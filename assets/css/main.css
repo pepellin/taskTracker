@@ -36,7 +36,6 @@ html, body {
 }
 
 .left {
-    width: 49.7%;
     float: left;
     height: 100%;
     box-sizing: border-box;
@@ -46,7 +45,6 @@ html, body {
 }
 
 .right {
-    width: 49.7%;
     float: right;
     height: 100%;
     box-sizing: border-box;
@@ -144,22 +142,33 @@ tr:nth-child(even){
 }
 
 table .col-one {
-    display: inline-block;
+    font-weight: bold;
     
 }
 
 table .col-two {
-    display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
-    padding-left: 5px;
     font-size: 0.8em;
-    color: #595959;
+    color: #999999;
+    padding-left: 0;
 }
 
 table .col-three {
-    display: inline-block;
-    position: absolute;
-    right: 0;
+    /*position: absolute;
+    right: 0;*/
+    padding-right: 0;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.9em;
+    font-size: 0.8em;
+}
+
+.left, .right {
+    width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+    .left, .right {width: 100%;}
+}
+
+@media only screen and (min-width: 768px) {
+    .left, .right {width: 49.7%;}
 }
