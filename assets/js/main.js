@@ -32,13 +32,8 @@ function submitForm () {
 }
 
 $(document).ready(function() {
-    window.callback = function(jsonObj){
-        tasksArr = jsonObj;
-        showTask();
-    };
-    var script = document.createElement('script');
-    script.src = "assets/json/initTasks.json";
-    document.getElementsByTagName('head')[0].appendChild(script);
+    tasksArr = window.jsonFile;
+    showTask();
 
     $( "#datepicker" ).datepicker({ minDate: new Date()});
 });
