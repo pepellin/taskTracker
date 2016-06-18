@@ -8,8 +8,8 @@ var tasksArr;
 function showTask() {
     var out = "";
     for(var i = tasksArr.length-1; i >= 0; i--) {
-        out += '<tr><td class="col-one">' + tasksArr[i].name + '</td><td class="col-two">' + 
-        tasksArr[i].date + '</td><td class="col-three">' + tasksArr[i].assigned + '</td></tr>';
+        out += "<tr><td class='col-one'>" + tasksArr[i].name + "</td><td class='col-two'>" + 
+        tasksArr[i].date + "</td><td class='col-three'>" + tasksArr[i].assigned + "</td></tr>";
     }
     document.getElementById("data").innerHTML = out;
 }
@@ -20,27 +20,27 @@ function checkDate(field) {
  
     if(regs = field.match(re)) {
         switch (regs[1]) {
-            case '01':
-            case '03':
-            case '05':
-            case '07':
-            case '08':
-            case '10':
-            case '12':
+            case "01":
+            case "03":
+            case "05":
+            case "07":
+            case "08":
+            case "10":
+            case "12":
                 if (parseInt(regs[2]) < 1 || parseInt(regs[2]) > 31) {
                     errorMsg = "Invalid value for day: " + regs[2];
                 }
                 break;
-            case '04':
-            case '06':
-            case '09':
-            case '11':
+            case "04":
+            case "06":
+            case "09":
+            case "11":
                 if (parseInt(regs[2]) < 1 || parseInt(regs[2]) > 30) {
                     errorMsg = "Invalid value for day: " + regs[2];
                 }
                 break;
-            case '02':
-                var lastDate = (regs[3] % 400 == 0 || (regs[3] % 100 != 0 && regs[3] % 4 == 0)) ? '29' : '28';
+            case "02":
+                var lastDate = (regs[3] % 400 == 0 || (regs[3] % 100 != 0 && regs[3] % 4 == 0)) ? "29" : "28";
                 if (parseInt(regs[2]) < 1 || parseInt(regs[2]) > lastDate) {
                     errorMsg = "Invalid value for day: " + regs[2];
                 }
@@ -84,7 +84,7 @@ function submitForm () {
     var newTask = {"name": tname, "date": date, "assigned": assigned };
     tasksArr.push(newTask);
     showTask();
-    document.forms['taskForm'].reset();
+    document.forms["taskForm"].reset();
     document.getElementById("errorMessage").style.display = "none";
 }
 
