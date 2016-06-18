@@ -89,7 +89,7 @@ function submitForm () {
 }
 
 $(document).ready(function() {
-    tasksArr = window.jsonFile;
+    tasksArr = jsonFile.reverse();
     showTask();
 
 });
