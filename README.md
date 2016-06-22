@@ -1,2 +1,2 @@
 # taskTracker
-TaskTracker loads initial tasks in a javascript file and enable users to add new task with "task name", "date", and "assigned" which will prepend the list. 
+TaskTracker loads initial tasks from a local javascript file and enable users to add a new task with "task name", "date", and "assigned" which will be prepended to the list. 
