@@ -57,14 +57,6 @@ function checkDate(field) {
 	    return false;
     }
 
-    var taskDate = new Date(field);
-    var curDate = new Date((new Date()).setHours(0,0,0,0));
-    if(taskDate < curDate) {
-        errorMsg = "Invalid value: " + taskDate.toDateString() + " must be on or after " + curDate.toDateString();
-        alert(errorMsg);    
-        return false;
-    }
-
 	return true;
  }
 
@@ -72,7 +64,7 @@ function submitForm () {
     var tname = document.getElementById("tname").value;
     var date = document.getElementById("date").value;
     var assigned = document.getElementById("assigned").value;
-    if (tname == null || tname == "" || date == null || date == "" || assigned == null || assigned == "") {
+    if (tname === null || tname === "" || date === null || date === "" || assigned === null || assigned === "") {
         alert("Please fill all the fields in the form.");
         document.getElementById("errorMessage").style.display = "block";
         return ;
