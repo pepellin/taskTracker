@@ -64,7 +64,7 @@ function submitForm () {
     var tname = document.getElementById("tname").value;
     var date = document.getElementById("date").value;
     var assigned = document.getElementById("assigned").value;
-    if (tname === null || tname === "" || date === null || date === "" || assigned === null || assigned === "") {
+    if (!tname || !date || !assigned) {
         alert("Please fill all the fields in the form.");
         document.getElementById("errorMessage").style.display = "block";
         return ;
