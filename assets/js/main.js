@@ -22,13 +22,13 @@ function resizeColThree() {
     var	myNodelist = document.getElementById("data");
     myNodelist.rows[0].cells[2].style.width = "auto";
     var col1Width = myNodelist.rows[0].cells[0].offsetWidth;
-    console.log(col1Width);
     var col2Width = myNodelist.rows[0].cells[1].offsetWidth;
     var col3Width = myNodelist.rows[0].cells[2].offsetWidth;
     var tableWidth = col1Width + col2Width + col3Width;
     if (tableMaxWidth - tableWidth > 0) {
-        var newWidth = tableMaxWidth - col1Width - col2Width - 15;
-        myNodelist.rows[0].cells[2].style.width = newWidth + "px";
+        var newCol3Width = tableMaxWidth - col1Width - col2Width - 15;
+        console.log(newCol3Width);
+        myNodelist.rows[0].cells[2].style.width = newCol3Width + "px";
     }
 }
 
