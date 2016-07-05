@@ -12,6 +12,22 @@ function showTask() {
         tasksArr[i].date + "</td><td class='col-three'>" + tasksArr[i].assigned + "</td></tr>";
     }
     document.getElementById("data").innerHTML = out;
+
+    resizeColThree();
+}
+window.onresize = resizeColThree;
+
+function resizeColThree() {
+    var tableMaxWidth = document.getElementById("table").offsetWidth;
+    var	myNodelist = document.getElementById("data");
+    var col1Width = myNodelist.rows[0].cells[0].offsetWidth;
+    var col2Width = myNodelist.rows[0].cells[1].offsetWidth;
+    var col3Width = myNodelist.rows[0].cells[2].offsetWidth;
+    var tableWidth = col1Width + col2Width + col3Width;
+    if (tableMaxWidth - tableWidth > 0) {
+        var newWidth = tableMaxWidth - col1Width - col2Width - 14;
+        myNodelist.rows[0].cells[2].style.width = newWidth + "px";
+    }
 }
 
 function checkDate(field) {
